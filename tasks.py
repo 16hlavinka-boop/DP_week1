@@ -34,7 +34,7 @@ step(4)
 #The function should return a numpy array of the same length, with all elements smaller than the cutoff being set to cutoff).
 #The name of the function should be ReLu
 
-sasdasdasdad
+
 # Your code here:
 # -----------------------------------------------
 def ReLu
