@@ -1,0 +1,70 @@
+name: Grade assignment
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  grade:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install test dependencies
+        run: python -m pip install numpy pytest
+
+      - name: Grade Task 1
+        id: grade_task1
+        run: python -m pytest -q tests/grade_task1.py
+        continue-on-error: true
+
+      - name: Grade Task 2
+        id: grade_task2
+        run: python -m pytest -q tests/grade_task2.py
+        continue-on-error: true
+
+      - name: Grade Task 3
+        id: grade_task3
+        run: python -m pytest -q tests/grade_task3.py
+        continue-on-error: true
+
+      - name: Report grading outcomes
+        if: always()
+        env:
+          TASK1_OUTCOME: ${{ steps.grade_task1.outcome }}
+          TASK2_OUTCOME: ${{ steps.grade_task2.outcome }}
+          TASK3_OUTCOME: ${{ steps.grade_task3.outcome }}
+        run: |
+          {
+            echo "## Grading results"
+            echo
+            echo "| Task | Test file | Outcome |"
+            echo "| --- | --- | --- |"
+            echo "| Task 1 | \`tests/grade_task1.py\` | ${TASK1_OUTCOME} |"
+            echo "| Task 2 | \`tests/grade_task2.py\` | ${TASK2_OUTCOME} |"
+            echo "| Task 3 | \`tests/grade_task3.py\` | ${TASK3_OUTCOME} |"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Fail workflow if any grading file failed
+        if: always()
+        env:
+          TASK1_OUTCOME: ${{ steps.grade_task1.outcome }}
+          TASK2_OUTCOME: ${{ steps.grade_task2.outcome }}
+          TASK3_OUTCOME: ${{ steps.grade_task3.outcome }}
+        run: |
+          if [[ "$TASK1_OUTCOME" != "success" ||
+                "$TASK2_OUTCOME" != "success" ||
+                "$TASK3_OUTCOME" != "success" ]]; then
+            echo "One or more grading files failed or did not run."
+            exit 1
+          fi
