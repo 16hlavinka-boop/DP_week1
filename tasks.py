@@ -1,6 +1,6 @@
 import numpy
 
-hello
+
 
 # Follow the tasks below to practice basic Python concepts.
 # Write your code in between the dashed lines.
@@ -15,8 +15,15 @@ hello
 # Your code here:
 # -----------------------------------------------
 
-def step
+def step(x):
 
+    if x>0:
+        return 1
+    else:
+        return -1
+    
+
+step(4)
 
 # -----------------------------------------------
 
@@ -27,7 +34,7 @@ def step
 #The function should return a numpy array of the same length, with all elements smaller than the cutoff being set to cutoff).
 #The name of the function should be ReLu
 
-
+sasdasdasdad
 # Your code here:
 # -----------------------------------------------
 def ReLu
