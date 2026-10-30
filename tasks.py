@@ -1,4 +1,4 @@
-import numpy
+import numpy as np
 
 
 
@@ -37,8 +37,14 @@ step(4)
 
 # Your code here:
 # -----------------------------------------------
-def ReLu
+def ReLu(x, cutoff=0):
+    for i in range(x):
+        if i <cutoff:
+            i=cutoff
 
+    return x
+
+test= np.array(0,2,4,-4,1)
 
 # -----------------------------------------------
 
