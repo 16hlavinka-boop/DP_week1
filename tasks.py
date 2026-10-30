@@ -62,8 +62,10 @@ ReLu(test)
 # -----------------------------------------------
 
 def neural_net_layer(array1,array2):
+   if array1.ndim == 1 and array2.ndim == 2:
+        array1, array2 = array2, array1
    
-   multiplied= np.multiply(array1 ,array2)
+   multiplied= array1 @ array2
 
    result = ReLu(multiplied)
 
@@ -71,8 +73,6 @@ def neural_net_layer(array1,array2):
 
 test1= np.array([0,2,4,-4,1])
 test2=np.array([[0,2,4,-4,1],[6,7,8,3,1]])
-
-np.multiply(test1 ,test2)
 
 neural_net_layer(test1,test2)
 # ------------------------------------------
