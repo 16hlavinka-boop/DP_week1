@@ -38,12 +38,12 @@ step(4)
 # Your code here:
 # -----------------------------------------------
 def ReLu(x, cutoff=0):
-    
-    for i in x:
-        if i <cutoff:
-            i=cutoff
+    y = x.copy()
+    for i in range(len(y))  :
+        if y[i] <cutoff:
+            y[i]=cutoff
 
-    return x
+    return y
 
 test= np.array([0,2,4,-4,1])
 
@@ -61,7 +61,18 @@ ReLu(test)
 # Your code here:
 # -----------------------------------------------
 
-def neural_net_layer
+def neural_net_layer(array1,array2):
+   
+   multiplied= np.multiply(array1 ,array2)
 
+   result = ReLu(multiplied)
 
+   return result
+
+test1= np.array([0,2,4,-4,1])
+test2=np.array([[0,2,4,-4,1],[6,7,8,3,1]])
+
+np.multiply(test1 ,test2)
+
+neural_net_layer(test1,test2)
 # ------------------------------------------
