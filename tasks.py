@@ -38,14 +38,16 @@ step(4)
 # Your code here:
 # -----------------------------------------------
 def ReLu(x, cutoff=0):
-    for i in range(x):
+    
+    for i in x:
         if i <cutoff:
             i=cutoff
 
     return x
 
-test= np.array(0,2,4,-4,1)
+test= np.array([0,2,4,-4,1])
 
+ReLu(test)
 # -----------------------------------------------
 
 
